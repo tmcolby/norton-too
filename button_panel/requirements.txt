@@ -1,0 +1,4 @@
+pkg-resources==0.0.0
+smbus2==0.4.2
+sparkfun-qwiic-button==2.0.1
+sparkfun-qwiic-i2c==0.9.11
