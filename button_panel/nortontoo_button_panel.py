@@ -15,29 +15,42 @@ class ButtonPanel(object):
             if not button.begin():
                 print(f"Problem initializing button {button}")
 
-
+LED_MAX = 255
+LED_MIN = 7
 def run2():
-    print("\nButton service started.")
+    print("Button service started.")
     bp = ButtonPanel(0x6d, 0x6e, 0x6f)
     while True:
         for index, button in enumerate(bp.buttons, 1):
             try:
                 if button.is_button_pressed():
-                    subprocess.run(f"./button_{index}_task.sh", shell=True)
                     for _ in range(3):
-                        button.LED_on(255)
+                        button.LED_on(LED_MAX)
                         time.sleep(0.05)
-                        button.LED_on(7)
+                        button.LED_on(LED_MIN)
                         time.sleep(0.05)
-                    while button.is_button_pressed():
-                        time.sleep(0.02)
+                    if not button.is_button_pressed():
+                        """ this is a click """
+                        # execute the task on a short click of the button
+                        print(f"CLICK event: button {index}")
+                        subprocess.run(f"./button_{index}_click.sh", shell=True)
+                        # time.sleep(1)  # no spamming the button
+                    else:
+                        """ this is long press """
+                        button.LED_on(LED_MAX)
+                        print(f"LONG PRESS event: button {index}")
+                        # execute task on the release of the button
+                        subprocess.run(f"./button_{index}_long_press.sh", shell=True)
+                        while button.is_button_pressed():
+                            time.sleep(0.02)
+                        button.LED_on(LED_MIN)
             except Exception as e:
                 print(e)
 
         time.sleep(0.02)
 
 def run():
-    print("\nButton service started.")
+    print("Button service started.")
 
     my_button1 = qwiic_button.QwiicButton(0x6d)
     my_button2 = qwiic_button.QwiicButton(0x6e)

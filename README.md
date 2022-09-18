@@ -53,3 +53,7 @@ echo "Plugin {
 0x6f Button 3  
  
 https://qwiic-button-py.readthedocs.io/en/main/index.html
+
+### Norton too button panel
+see `/button_panel`  
+Each of the three buttons tolerate a "click" or "long press" input.  For a given event, by a given button, the associated script `button_<1|2|3|>_<click|long_press>.sh` will be executed.
