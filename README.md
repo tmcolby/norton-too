@@ -50,4 +50,6 @@ echo "Plugin {
 0x77 BME280 environment sensor
 0x6d Button 1
 0x6e Button 2
-0x6f Button 3
+0x6f Button 3  
+ 
+https://qwiic-button-py.readthedocs.io/en/main/index.html
