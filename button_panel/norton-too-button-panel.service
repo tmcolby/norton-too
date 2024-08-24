@@ -1,0 +1,16 @@
+[Unit]
+Description=Norton too panel buttons
+#After=network-online.target
+
+[Service]
+Environment=PYTHONPATH=/opt/nortontoo-panel-buttons
+WorkingDirectory=/opt/nortontoo-panel-buttons
+ExecStart=/opt/nortontoo-panel-buttons/venv/bin/python3 -u nortontoo_panel_buttons.py
+TimeoutStartSec=3
+Restart=always
+StartLimitInterval=60
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target
+Alias=nortontoo-panel-buttons
