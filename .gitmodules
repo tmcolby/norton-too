@@ -1,3 +1,0 @@
-[submodule "Qwiic_Button_Py"]
-	path = Qwiic_Button_Py
-	url = git@github.com:sparkfun/Qwiic_Button_Py.git
